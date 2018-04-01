@@ -20,6 +20,8 @@ public class Main {
         testWordFrequency();
         testArraysAndString();
         testLinkedLists();
+        testStacks();
+        testRecursion();
     }
 
 
@@ -191,6 +193,9 @@ public class Main {
         }
 
         LinkedListProblems llp = new LinkedListProblems();
+
+        llp.KthToLastElement(head, 6);
+
         llp.removeDuplicates(head);
 
 
@@ -200,6 +205,34 @@ public class Main {
             temp = temp.next;
         }
 
+    }
+
+    static void testStacks() {
+        System.out.println("\n\n[*] Stacks Testing");
+        Dog d1 = new Dog("first");
+        Dog d2 = new Dog("second");
+        Cat c1 = new Cat("third");
+        Dog d3 = new Dog("fourth");
+
+        AnimalQueue aq = new AnimalQueue();
+        aq.enqueue(d1);
+        aq.enqueue(d2);
+        aq.enqueue(c1);
+        aq.enqueue(d3);
+
+        System.out.println("poll 1: " + aq.dequeueCats().name);
+    }
+
+    static void testRecursion() {
+        System.out.println("\n\n[*] Recursion Testing");
+        int steps = 25;
+        int arr [] = new int[] {5,6,2,6,3,1,7,8,3,5,6};
+        Arrays.sort(arr);
+        RecursionProblems rp = new RecursionProblems();
+
+        System.out.println("Recursion: Number of Ways to climb " + steps + " steps: " + rp.countWays(steps));
+        System.out.println("Memoization: Number of Ways to climb " + steps + " steps: " + rp.countWaysMamoization(steps));
+        System.out.println("Magic Index: " + rp.magicFast(arr));
     }
 }
 
