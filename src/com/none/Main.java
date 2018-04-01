@@ -1,9 +1,7 @@
 package com.none;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.PriorityQueue;
+import java.util.*;
+
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
@@ -19,6 +17,9 @@ public class Main {
         testPalindrome();
         testPermutation();
         testJUnit();
+        testWordFrequency();
+        testArraysAndString();
+        testLinkedLists();
     }
 
 
@@ -155,6 +156,51 @@ public class Main {
         System.out.println(result.wasSuccessful());
     }
 
+    static void testWordFrequency() {
+        System.out.println("\n\n[*] Word Frequency Testing");
+        String word = "this";
+        String arr[] = new String[]{"this", "that", "THIS", "those", "him"};
+        MediumProblems mp = new MediumProblems();
+        mp.wordFrequency(arr, word);
+    }
+
+    static void testArraysAndString() {
+        System.out.println("\n\n[*] String and Arrays Testing");
+        ArraysAndStringProblems asp = new ArraysAndStringProblems();
+        asp.URLify("This is a new test String");
+        asp.palindromPermutation("aabbc");
+    }
+
+    static void testLinkedLists() {
+        System.out.println("\n\n[*] LinkedList Testing");
+        Random rand = new Random();
+
+        int total = 10;
+        LinkedListNode head = new LinkedListNode(53);
+        LinkedListNode prev = head;
+        for (int i=0; i< total; i++) {
+            LinkedListNode temp = new LinkedListNode(rand.nextInt(9) + 1);
+            temp.setPrevious(prev);
+            prev = temp;
+        }
+
+        LinkedListNode temp = head;
+        while(temp.next != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+
+        LinkedListProblems llp = new LinkedListProblems();
+        llp.removeDuplicates(head);
+
+
+        temp = head;
+        while(temp.next != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+
+    }
 }
 
 
