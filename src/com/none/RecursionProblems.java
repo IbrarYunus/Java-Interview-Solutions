@@ -2,16 +2,9 @@ package com.none;
 
 import java.util.*;
 
-import static sun.jvm.hotspot.code.CompressedStream.L;
 
 public class RecursionProblems {
 
-    powerSet = new HashSet<List<String>>();
-    List<String> mainList;
-
-    {
-        mainList = new ArrayList<String>(L);
-    }
 
     public int countWays(int n) {
         if (n < 0) {
@@ -74,5 +67,81 @@ public class RecursionProblems {
             }
         }
         return result;
+    }
+
+    public ArrayList<ArrayList<Integer>> getSubsets (ArrayList<Integer> set, int index) {
+        ArrayList<ArrayList<Integer>> allsubsets;
+        if(set.size() == index) {
+            allsubsets = new ArrayList<ArrayList<Integer>>();
+            allsubsets.add(new ArrayList<Integer>());
+        } else {
+            allsubsets = getSubsets(set, index + 1);
+            int item = set.get(index);
+            ArrayList<ArrayList<Integer>> moresubsets = new ArrayList<ArrayList<Integer>>();
+            for(ArrayList<Integer> subset: allsubsets) {
+                ArrayList<Integer> newsubset = new ArrayList<Integer>();
+                newsubset.addAll(subset);
+                newsubset.add(item);
+                moresubsets.add(newsubset);
+            }
+            allsubsets.addAll(moresubsets);
+        }
+        return allsubsets;
+    }
+
+    public ArrayList<String> getPerms(String str) {
+        if (str == null) return null;
+
+        ArrayList<String> permutations = new ArrayList<String>();
+        if (str.length() == 0) {
+            permutations.add("");
+            return permutations;
+        }
+
+        char first = str.charAt(0);
+        String remainder = str.substring(1);
+        ArrayList<String> words = getPerms(remainder);
+        for(String word: words) {
+            for (int  j =0; j< word.length(); j++) {
+                String s = insertCharAt(word, first, j);
+                permutations.add(s);
+            }
+        }
+        return permutations;
+    }
+
+    public String insertCharAt (String word, char c, int i) {
+        String start = word.substring(0,i);
+        String end = word.substring(i);
+        return start + c + end;
+    }
+
+    public void brackets(int openStock, int closeStock, String s) {
+        if(openStock == 0 && closeStock == 0) {
+            System.out.println(s);
+        }
+        if(openStock > 0) {
+            brackets(openStock -1, closeStock +1, s + "<");
+        }
+        if(closeStock > 0) {
+            brackets(openStock, closeStock-1, s + ">");
+        }
+    }
+
+    public int makeChange (int n) {
+        int[] denoms = {25, 10, 5, 1};
+        return makeChange(n, denoms, 0);
+    }
+
+    public int makeChange(int amount, int[] denoms, int index) {
+        if (index >= denoms.length - 1) return 1;
+
+        int denomAmount = denoms[index];
+        int ways = 0;
+        for(int i = 0; i * denomAmount <  amount; i++) {
+            int amountRemaining = amount - i * denomAmount;
+            ways += makeChange(amountRemaining, denoms, index+1);
+        }
+        return ways;
     }
 }

@@ -22,6 +22,10 @@ public class Main {
         testLinkedLists();
         testStacks();
         testRecursion();
+
+        System.out.println("checking");
+        System.out.println(Math.pow(2, 5));
+
     }
 
 
@@ -233,6 +237,9 @@ public class Main {
         System.out.println("Recursion: Number of Ways to climb " + steps + " steps: " + rp.countWays(steps));
         System.out.println("Memoization: Number of Ways to climb " + steps + " steps: " + rp.countWaysMamoization(steps));
         System.out.println("Magic Index: " + rp.magicFast(arr));
+
+        System.out.println("Pairs of all brackets:");
+        rp.brackets(4,0,"");
     }
 }
 
